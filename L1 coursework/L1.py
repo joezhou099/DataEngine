@@ -1,5 +1,5 @@
 # action1
-print(sum(list(range(2,102,2))))
+print('sum is',sum(list(range(2,102,2))))
 print('\n')
 
 # action2
