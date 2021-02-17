@@ -9,13 +9,15 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 
+# -------------------------------------
+# ACTION 1
+# -------------------------------------
 def exportcsv(pred):
     res = pd.DataFrame(columns=['PassengerId','Survived'])
     res['PassengerId'] = test_data['PassengerId']
     res['Survived'] = pd.Series(pred)
     res.to_csv('~/Desktop/res.csv', index=False)
 
-# action 1
 # 加载
 train_data = pd.read_csv('./Titanic_Data/train.csv')
 test_data = pd.read_csv('./Titanic_Data/test.csv')
@@ -130,8 +132,10 @@ pred2 = clf2.predict(test_features)
 # pred4 = clf4.predict(test_features)
 # -------------------------------------
 
-#
-# # action 2
+
+# -------------------------------------
+# ACTION 2
+# -------------------------------------
 # def get_page_content(request_url):
 #     headers={'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36'}
 #     html=requests.get(request_url,headers=headers,timeout=10)
