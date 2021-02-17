@@ -1,5 +1,3 @@
-import requests
-from bs4 import BeautifulSoup
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction import DictVectorizer
@@ -9,14 +7,11 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
 import matplotlib.pyplot as plt
 
-# -------------------------------------
-# ACTION 1
-# -------------------------------------
 def exportcsv(pred):
     res = pd.DataFrame(columns=['PassengerId','Survived'])
     res['PassengerId'] = test_data['PassengerId']
     res['Survived'] = pd.Series(pred)
-    res.to_csv('~/Desktop/res.csv', index=False)
+    res.to_csv('./res.csv', index=False)
 
 # 加载
 train_data = pd.read_csv('./Titanic_Data/train.csv')
@@ -73,6 +68,7 @@ clf1.fit(train_features, train_labels)
 print(u'Non-Cross Validation LOGISTIC REGRESSION score 准确率为 %.4lf' \
       % clf1.score(train_features, train_labels))
 pred1 = clf1.predict(test_features)
+
 # -------------------------------------
 # 方法二 SVM
 # -------------------------------------
@@ -96,6 +92,7 @@ clf2.fit(train_features, train_labels)
 print(u'Non-Cross Validation SVM score 准确率为 %.4lf' \
       % clf2.score(train_features, train_labels))
 pred2 = clf2.predict(test_features)
+
 # -------------------------------------
 # 方法三 决策树
 # -------------------------------------
@@ -113,6 +110,7 @@ pred2 = clf2.predict(test_features)
 # print(u'Non-Cross Validation 决策树 score 准确率为 %.4lf' \
 #       % clf3.score(train_features, train_labels))
 # pred3 = clf3.predict(test_features)
+
 # -------------------------------------
 # 方法四 随机森林
 # -------------------------------------
@@ -130,45 +128,3 @@ pred2 = clf2.predict(test_features)
 # print(u'Non-Cross Validation 随机森林 score 准确率为 %.4lf' \
 #       % clf4.score(train_features, train_labels))
 # pred4 = clf4.predict(test_features)
-# -------------------------------------
-
-
-# -------------------------------------
-# ACTION 2
-# -------------------------------------
-# def get_page_content(request_url):
-#     headers={'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36'}
-#     html=requests.get(request_url,headers=headers,timeout=10)
-#     content = html.text
-#     soup = BeautifulSoup(content, 'html.parser', from_encoding='utf-8')
-#     return soup
-#
-# def analysis(soup):
-#     temp = soup.find('div',class_="tslb_b")
-#     df = pd.DataFrame(columns = ['id', 'brand', 'car_model', 'type', 'desc', 'problem', 'datetime', 'status'])
-#     tr_list = temp.find_all('tr')
-#     for tr in tr_list:
-#         td_list = tr.find_all('td')
-#         if len(td_list) > 0:
-#             id, brand, car_model, type, desc, problem, datetime, status = td_list[0].text, td_list[1].text, td_list[2].text, td_list[3].text, td_list[4].text, td_list[5].text, td_list[6].text,td_list[7].text
-#             temp = {}
-#             temp['id'] = id
-#             temp['brand'] = brand
-#             temp['car_model'] = car_model
-#             temp['type'] = type
-#             temp['desc'] = desc
-#             temp['problem'] = problem
-#             temp['datetime'] = datetime
-#             temp['status'] = status
-#             df = df.append(temp, ignore_index=True)
-#     return df
-#
-# result = pd.DataFrame(columns=['id', 'brand', 'car_model', 'type', 'desc', 'problem', 'datetime', 'status'])
-# base_url = 'http://www.12365auto.com/zlts/0-0-0-0-0-0_0-0-0-0-0-0-0-1.shtml'
-# request_url = base_url
-# soup = get_page_content(request_url)
-# df=analysis(soup)
-# result = result.append(df)
-#
-# print(result)
-# result.to_excel('./car_complaint.xlsx', index=False)
